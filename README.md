@@ -1,4 +1,4 @@
-# course-scheduling-Taiwanese-schools
+# Course scheduling for Taiwanese schools
 This repository constains scripts for solveing a course scheduling problem for an elementary school in Taiwan. The framework 
 can also be used to solve the teacher assignment problem simultaneously. 
 
@@ -9,10 +9,10 @@ the number of periods (time slots) that should be taught a week for each subject
 should receive 5 Chinese classes a week.
 
 For clarity, I will use **course** to represent a class of a 
-certain subject for a certain grade with a homeroom number and class index.  
+certain subject for a certain grade with a homeroom number and a class index. 
 For example, a Math class for grade 5 homeroom 3 with class index 1
-would be refered to as a course and another Math class for the same grade, same homeroom but 
-a different class index would be another course. See script **BaseModel.py** for more details.
+would be referred to as a course and another Math class for the same grade, same homeroom but 
+a different class index would referred to as another course. See script **BaseModel.py** for more details.
 
 ## Constraints considered
 The scheduling constraints considered in this program include:
@@ -24,7 +24,7 @@ are usually sacrificed by manual scheduling due to scheduling complexity and tim
 - Some courses need to happen at the same period so that some students from differet homerooms can attend alternative
 courses designed for their needs. 
 - Some courses need to be taught in consecutive periods. 
-- Some courses are restrained to be in certain periods. 
+- Some courses are restrained in/from certain periods. 
 - Some courses of the same subject needs to be at least two days apart (or one day apart 
 if one of the courses is scheduled in Wednesday).
 - Split-and-merge between two or more homeroom classes: 
@@ -53,7 +53,7 @@ a pickle file, "status.pkl".
 - **solving_zhes_using_sequential_LNS.py** is the main scrip to run to solve the scheduling problem and outputs a 
 pickled solution file **status.pkl**
 
-- ** CourseScheduling.py ** contains the large neibourhood algorithm for solving the problem. 
+- **CourseScheduling.py** contains the large neibourhood algorithm for solving the problem. 
 
 - **scoring.py** defines the penalty for violating the requirements or preferences. 
 Violation of strict requirement would incur high penalty score while violation of 
@@ -66,7 +66,7 @@ The functions can also be used as base functions for other heuristic methods suc
 - **PostSolution.py** contains functions for checking requirements and for output the 
 schedules in **.xlsx** format and pickle format.
 
-- ** course_scheduling_app.py ** can be used to deploy a dash application for course
+- **course_scheduling_app.py** can be used to deploy a dash application for course
 scheduling. The original concept was to do manual scheduling through the designed 
 interface but the prototype was discontinued due to time constraint. The script
 is saved in the repository as it may be useful for other interested parties.
