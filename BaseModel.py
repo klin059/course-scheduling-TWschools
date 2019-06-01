@@ -99,6 +99,8 @@ class Course(object):
             potential_rooms = self.potential_rooms
         else:
             potential_rooms = self.get_potential_room_assignment(status.room_to_course_tuples)
+        if (len(potential_rooms) != 1):
+            print("debugging - {}".format(potential_rooms))
         assert(len(potential_rooms) == 1)
         room_name = potential_rooms[0]
         for R in status.list_of_Rooms:

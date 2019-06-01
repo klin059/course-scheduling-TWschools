@@ -15,15 +15,15 @@ random.seed()
 
 
 
-def solving_zhes_with_sequencial_LNS(seed = None, n_iteration = 2000):
+def solving_zhes_with_sequencial_LNS(seed = None, n_iteration = 1000):
         
     random.seed()
     
-    subject_set = {'閱讀', '彈性英語', '電腦', '綜合', '數', '彈性', '生活', '音樂', 
-        '健康', '閩南語', '英語', '自然', '社會', '彈性音樂', '國', '自然實驗', '體育', '美勞',
-        '英語12a', '彈性英語12a','英語12b', '彈性英語12b', '英語12c', '彈性英語12c',
-        '英語34a', '彈性英語34a','英語34b', '彈性英語34b', '英語34c', '彈性英語34c',
-        '英語56a', '彈性英語56a','英語56b', '彈性英語56b','英語56c', '彈性英語56c'}
+    subject_set = {'Reading', 'English(extra)', 'Computer', 'Integrative Activities', 'Math', 'Flexible', 'Life', 'Music', 
+        'Health', 'Dialect', 'English', 'Science', 'Social', 'Music(extra)', 'Chinese', 'Science(lab)', 'PE', 'Art',
+        'English12a', 'English(extra)12a','English12b', 'English(extra)12b', 'English12c', 'English(extra)12c',
+        'English34a', 'English(extra)34a','English34b', 'English(extra)34b', 'English34c', 'English(extra)34c',
+        'English56a', 'English(extra)56a','English56b', 'English(extra)56b','English56c', 'English(extra)56c'}
     
 
     best_status = zhes_scheduling_problem.initate_zhes_status()
@@ -35,7 +35,7 @@ def solving_zhes_with_sequencial_LNS(seed = None, n_iteration = 2000):
             if (C.subject  not in list_of_subjects): #
                 best_status.change_unassigned_Course_to_stalled_list(C) 
                 
-    only_keep_subjects(best_status, ["自然", "自然實驗"])
+    only_keep_subjects(best_status, ["Science", "Science(lab)"])
     
     best_status , score = cs.large_neighbourhood_search_with_scoring(best_status, max_iteration = n_iteration)
     if not best_status.list_of_unassigned_Courses == []:
@@ -43,9 +43,9 @@ def solving_zhes_with_sequencial_LNS(seed = None, n_iteration = 2000):
     best_status.fix_assigned_Courses()
     best_status.free_stalled_Courses()
     
-    only_keep_subjects(best_status, ['英語12a', '彈性英語12a','英語12b', '彈性英語12b', '英語12c', '彈性英語12c',
-        '英語34a', '彈性英語34a','英語34b', '彈性英語34b', '英語34c', '彈性英語34c',
-        '英語56a', '彈性英語56a','英語56b', '彈性英語56b','英語56c', '彈性英語56c',"英語", "彈性英語"])
+    only_keep_subjects(best_status, ['English12a', 'English(extra)12a','English12b', 'English(extra)12b', 'English12c', 'English(extra)12c',
+        'English34a', 'English(extra)34a','English34b', 'English(extra)34b', 'English34c', 'English(extra)34c',
+        'English56a', 'English(extra)56a','English56b', 'English(extra)56b','English56c', 'English(extra)56c',"English", "English(extra)"])
     
     best_status , score = cs.large_neighbourhood_search_with_scoring(best_status, max_iteration = n_iteration)
     if not best_status.list_of_unassigned_Courses == []:
@@ -53,7 +53,7 @@ def solving_zhes_with_sequencial_LNS(seed = None, n_iteration = 2000):
     best_status.fix_assigned_Courses()
     best_status.free_stalled_Courses()
     
-    only_keep_subjects(best_status, ['閩南語','社會'])
+    only_keep_subjects(best_status, ['Dialect','Social'])
     best_status , score = cs.large_neighbourhood_search_with_scoring(best_status, max_iteration = n_iteration)
     if not best_status.list_of_unassigned_Courses == []:
         print([c.name for c in best_status.list_of_unassigned_Courses])
@@ -61,7 +61,7 @@ def solving_zhes_with_sequencial_LNS(seed = None, n_iteration = 2000):
     best_status.fix_assigned_Courses()
     best_status.free_stalled_Courses()
     
-    only_keep_subjects(best_status, ["音樂", "彈性音樂", '體育','美勞'])
+    only_keep_subjects(best_status, ["Music", "Music(extra)", 'PE','Art'])
     best_status , score = cs.large_neighbourhood_search_with_scoring(best_status, max_iteration = n_iteration)
     if not best_status.list_of_unassigned_Courses == []:
         return best_status, None
@@ -69,7 +69,7 @@ def solving_zhes_with_sequencial_LNS(seed = None, n_iteration = 2000):
     best_status.free_stalled_Courses()
        
     
-    only_keep_subjects(best_status, subject_set - {'國', '數', '綜合', '彈性', '生活'})
+    only_keep_subjects(best_status, subject_set - {'Chinese', 'Math', 'Integrative Activities', 'Flexible', 'Life'})
     best_status , score = cs.large_neighbourhood_search_with_scoring(best_status, max_iteration = n_iteration)
     if not best_status.list_of_unassigned_Courses == []:
         print([c.name for c in best_status.list_of_unassigned_Courses])
