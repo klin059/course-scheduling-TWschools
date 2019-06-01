@@ -76,7 +76,6 @@ Use the following command to solve the scheduling problem:
 ```python
 python solving_zhes_using_sequential_LNS.py
 ```
-
 # License
 MIT License
 

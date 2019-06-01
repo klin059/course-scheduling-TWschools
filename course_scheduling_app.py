@@ -13,8 +13,13 @@ import PostSolution as ps
 import BaseModel as bm
 import zhes_scheduling_problem as problem 
 import webbrowser
+import pickle
+import numpy as np
 
 status = problem.initate_zhes_status()
+#with open('status.pkl','rb') as f:
+#    status = pickle.load(f)
+
 def get_data_dictionary(status_input):
     room_dict, teacher_dict = ps.put_solution_in_df(status_input)
     return {**room_dict, **teacher_dict}
@@ -37,10 +42,11 @@ def generate_table_div(df_table_id, df_dropdown):
     return html.Div([
         dcc.Dropdown(
             id = df_dropdown,
+            placeholder = "Select a teacher or a room to view the existing timetable",
             options=dropdown_list 
         ),
         html.Div(id = df_table_id)
-            ], className = 'one-half column')
+            ], className = 'twelve columns')
         
 def get_list_of_teacher_names_as_dropdown_options(status_input):
     return list_to_dropdown_options([tr.name for tr in status_input.list_of_Teachers])
@@ -50,36 +56,40 @@ def get_list_of_room_names_as_dropdown_options(status_input):
 
 app = dash.Dash()
 app.layout = html.Div([
+    html.H6('View timetable'),
+    html.P("Note the course name is composed of grade number, class number, subject name, teacher's name, separated by an underscore"),
     generate_table_div('df_table1', 'df_dropdown1'),
-    generate_table_div('df_table2', 'df_dropdown2'),
+#    generate_table_div('df_table2', 'df_dropdown2'),
 
     html.Div([
 #        html.Div(id='invis_div', children = all_dict, style={'display': 'none'}),
-        html.H6('新增課堂:', className = 'one-third column'),
+        html.H6('Assigning course', className = 'row'),
+        html.P('Select a course first before selecting a period. The periods shown in the dropdown menu are the available periods for the selected course satisfying all other requirements.'),
         dcc.Dropdown(
                 id = 'add_teacher_filter',
-                placeholder = '指定老師',
+                placeholder = 'Filter courses by teacher',
                 options = get_list_of_teacher_names_as_dropdown_options(status)
                 ),
         dcc.Dropdown(
                 id = 'add_room_filter',
-                placeholder = '指定班級',
+                placeholder = 'Filter courses by room',
                 options = get_list_of_room_names_as_dropdown_options(status)
                 ),
         dcc.Dropdown(
                 id = 'add_course_dropdown',
-                placeholder = '選課',
+                placeholder = 'Select a course',
                 options = get_unassigned_course_names_as_dropdown_options(status)
                 ),
         dcc.Dropdown(
                 id = 'available_period_dropdown',
-                placeholder = '選擇課堂',
+                placeholder = 'Select a period',
 #                options = []
                 ),
-        html.Button('新增課堂', id = 'add_course_button')        
-            ], className = 'one-third column'),
-        html.Div(id = "print_actions_div")
-], className = "row")
+        html.Button('Assign the selected course.', id = 'add_course_button'), 
+        html.Div(id = "print_actions_div")        
+            ], className = 'twelve columns'),
+        
+], className = "one-half column")  #, className = "row"
 
 # decorator for including var as one of the input
 def input_wrapper(var):
@@ -89,7 +99,12 @@ def input_wrapper(var):
         return input_function_wrapper
     return input_wrapper
 
-for df_table, df_dropdown in [('df_table1', 'df_dropdown1'), ('df_table2', 'df_dropdown2')]:
+#def _convert_course_name_to_subject_name(course_name):
+#    if np.isnan(course_name):
+#        return course_name
+#    return course_name.split("_")[2]
+
+for df_table, df_dropdown in [('df_table1', 'df_dropdown1')]:  #, ('df_table2', 'df_dropdown2')
     @input_wrapper(status)
     @app.callback(Output(component_id= df_table, component_property= 'children'), 
                   [Input(component_id= df_dropdown, component_property='value')])
@@ -100,13 +115,14 @@ for df_table, df_dropdown in [('df_table1', 'df_dropdown1'), ('df_table2', 'df_d
             return None
         max_rows=10
         dataframe = status.all_dict[input_value]
+      
         return html.Table(
             # Header
             [html.Tr([html.Td(" ")] + [html.Th(col) for col in dataframe.columns])] +
     
             # Body
             [html.Tr([html.Td(i+1)] + [
-                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+                html.Td( dataframe.iloc[i][col] ) for col in dataframe.columns
             ]) for i in range(min(len(dataframe), max_rows))]
         )
 
@@ -123,10 +139,10 @@ for df_table, df_dropdown in [('df_table1', 'df_dropdown1'), ('df_table2', 'df_d
 #def reload_df_table(children):
 #    return get_data_dictionary(status)
     
-def _mapping_weekday_to_chinese(period):
-    mapping = {"Monday":"星期一", 'Tuesday':'星期二' , 'Wednesday':'星期三', 'Thursday':'星期四', 'Friday':'星期五'
-               }
-    return "{}, {}".format(mapping[period[0]], str(period[1]))
+#def _mapping_weekday_to_chinese(period):
+#    mapping = {"Monday":"星期一", 'Tuesday':'星期二' , 'Wednesday':'星期三', 'Thursday':'星期四', 'Friday':'星期五'
+#               }
+#    return "{}, {}".format(mapping[period[0]], str(period[1]))
 
 # select course from drop down callback
 @input_wrapper(status)
@@ -143,10 +159,12 @@ def get_feasible_periods_as_dropdown_option(course_name):
     feasible_periods = course.get_feasible_periods_by_requirement(status, feasible_periods) 
 #    print(feasible_periods)
     if feasible_periods == set():
-        return [{'label': "無可用課堂", 'value': ""}]
+        return [{'label': "No feasible periods available.", 'value': ""}]
     fp = list(feasible_periods)
+    print(fp)
     fp.sort()
-    solution = [{'label': _mapping_weekday_to_chinese(p), 'value': "_".join([str(p[0]), str(p[1])])} for p in fp]
+#    solution = [{'label': p, 'value': "_".join([str(p[0]), str(p[1])])} for p in fp]
+    solution = [{'label': "{}, period {}".format(p[0],p[1]), 'value': "_".join([str(p[0]), str(p[1])])} for p in fp]
     return solution
 
 @app.callback(
@@ -168,7 +186,7 @@ def assign_course_to_period(n_clicks, course_name, period_in_string):
 #    print("{} unassigned courses".format(len(status.list_of_unassigned_Courses)))
     #course.assign_course_period(local_solution, period)
     if (course_name is None) or (period_in_string is None):
-        return "請先選課及選節"
+        return ""
     if period_in_string is None:
         return "No available period"
     p = period_in_string.split("_")
@@ -178,9 +196,9 @@ def assign_course_to_period(n_clicks, course_name, period_in_string):
     print("assigned {} to period {}".format(course.name, p))
     status.all_dict = get_data_dictionary(status)
     if course.Room == course.homeRoom:
-        return "分發 {} 至 {} 於 {}".format(course.name, course.Room.name, course.period)
+        return "Assign {} to room {}, {} period {}".format(course.name, course.Room.name, course.period[0], course.period[1])
     else:
-        return "分發 {} 至 {} (以及{}) 於 {}".format(course.name, course.Room.name, course.homeRoom.name, course.period)
+        return "Assign {} to room {} (and {}), {}".format(course.name, course.Room.name, course.homeRoom.name, course.period[0], course.period[1])
 
 # reload dropdown
 @input_wrapper(status)
