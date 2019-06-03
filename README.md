@@ -55,8 +55,7 @@ assigned courses are removed and the algorithm restarts. See **solving_zhes_usin
 
 ## Solution output
 Schedules (timetables) for each teacher and each room are written in "timetable/teacher_tb.xlsx" 
-and "timetable/rooms.xlsx", respectively. A copy of the solution in base classes is saved in  
-a pickle file, "status.pkl".
+and "timetable/rooms.xlsx", respectively. A copy of the solution in base classes is saved in a pickle file, "status.pkl".
 
 ## Scripts
 - **zhes_scheduling_problem.py** defines the inputs for the scheduling problem.
