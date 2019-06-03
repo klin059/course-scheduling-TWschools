@@ -40,7 +40,8 @@ if one of the courses is scheduled in Wednesday).
 some English classes split a homeroom students into two or three groups by students' English abilities.
 The splited groups from individual homerooms are merged with the groups from other homerooms to form 
 another class.
-![](images/split-and-merge_illustration.png)
+
+![](split-and-merge_illustration.PNG)
 
 ## Basic scheduling strategy
 - Define operations for assigning and removing courses from a certain time slot and for certain room. 
@@ -77,9 +78,9 @@ The functions can also be used as base functions for other heuristic methods suc
 schedules in **.xlsx** format and pickle format.
 
 - **course_scheduling_app.py** can be used to deploy a dash application for course
-scheduling. The original concept was to do manual scheduling through the designed 
-interface but the prototype was discontinued due to time constraint. The script
-is saved in the repository as it may be useful for other interested parties.
+scheduling. The app will automatically derive the feasible periods for a course selected.
+Hence doing manual course scheduling in the app is straight forward since you don't have to 
+manually check constraints and find out all the feasible periods.
 
 # Running the scripts
 Use the following command to solve the scheduling problem:
