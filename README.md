@@ -1,4 +1,13 @@
 # Course scheduling for Taiwanese schools
+## Motivation
+Course scheduling is probably the most important task to do in preparation for a new academic year for schools in Taiwan. 
+There are software designed for course scheduling but, to my knowledge, none of them are robust enough to satisfy the 
+scheduling requirements of Taiwanese 
+schools. Instead, the school I worked with had to do manual scheduling that takes more than 2 weeks and often some
+of the less important scheduling requirements are ignored so that the scheduler don't have to frequently re-schedule the timetables. 
+Motivated to solve this difficulty, I have designed a course schduling software specifically for Taiwanese schools.
+
+## Introduction
 This repository constains scripts for solveing a course scheduling problem for an elementary school in Taiwan. The framework 
 can also be used to solve the teacher assignment problem simultaneously. 
 
