@@ -41,7 +41,7 @@ some English classes split a homeroom students into two or three groups by stude
 The splited groups from individual homerooms are merged with the groups from other homerooms to form 
 another class.
 
-![](split-and-merge_illustration.PNG)
+<img src="images/split-and-merge_illustration.PNG">
 
 ## Basic scheduling strategy
 - Define operations for assigning and removing courses from a certain time slot and for certain room. 
