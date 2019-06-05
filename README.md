@@ -1,7 +1,5 @@
 ![](images/timetabling_G2_1.gif)
 
-![](images/timetabling_app.gif)
-
 # Course scheduling for Taiwanese schools
 ## Motivation
 Course scheduling is probably the most important task to do in preparation for a new academic year for schools in Taiwan. 
@@ -45,7 +43,7 @@ some English classes split a homeroom students into two or three groups by stude
 The splited groups from individual homerooms are merged with the groups from other homerooms to form 
 another class.
 
-<img src="images/split-and-merge_illustration.PNG" width = "200">
+<img src="images/split-and-merge_illustration.PNG" width = "400">
 
 ## Basic scheduling strategy
 - Define operations for assigning and removing courses from a certain time slot and for certain room. 
@@ -86,7 +84,7 @@ Hence doing manual course scheduling in the app is straight forward since you do
 manually check constraints and find out all the feasible periods. The prototype was for illustration 
 purpose and the functionality was not fully developed.
 
-
+![](images/timetabling_app.gif)
 
 # Running the scripts
 Use the following command to solve the scheduling problem:
