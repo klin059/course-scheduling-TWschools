@@ -1,5 +1,7 @@
 ![](images/timetabling_G2_1.gif)
 
+![](images/timetabling_app.gif)
+
 # Course scheduling for Taiwanese schools
 ## Motivation
 Course scheduling is probably the most important task to do in preparation for a new academic year for schools in Taiwan. 
@@ -81,7 +83,8 @@ schedules in **.xlsx** format and pickle format.
 - **course_scheduling_app.py** can be used to deploy a dash application for course
 scheduling. The app will automatically derive the feasible periods for a course selected.
 Hence doing manual course scheduling in the app is straight forward since you don't have to 
-manually check constraints and find out all the feasible periods.
+manually check constraints and find out all the feasible periods. 
+
 
 # Running the scripts
 Use the following command to solve the scheduling problem:
