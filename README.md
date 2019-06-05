@@ -1,3 +1,5 @@
+![](images/timetabling_G2_1.gif)
+
 # Course scheduling for Taiwanese schools
 ## Motivation
 Course scheduling is probably the most important task to do in preparation for a new academic year for schools in Taiwan. 
