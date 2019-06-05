@@ -82,7 +82,7 @@ schedules in **.xlsx** format and pickle format.
 scheduling. The prototype will automatically derive the feasible periods for a course selected.
 Hence doing manual course scheduling in the app is straight forward since you don't have to 
 manually check constraints and find out all the feasible periods. The prototype was for illustration 
-purpose and the functionality was not fully developed.
+only and the functionalities was not fully developed.
 
 ![](images/timetabling_app.gif)
 
