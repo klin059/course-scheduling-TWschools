@@ -1,6 +1,12 @@
 ![](images/timetabling_G2_1.gif)
 
 # Course scheduling for Taiwanese schools
+## Summary
+This repository constains a software for automatic course scheduling with constraints
+specific to Taiwanese schools. The software is applied to a real-world course scheduling problem with
+994 courses, 66 teachers and 49 rooms and reduced the scheduling time from two weeks of 
+manual planning to minutes.
+
 ## Motivation
 Course scheduling is probably the most important task to do in preparation for a new academic year for schools in Taiwan. 
 There are software designed for course scheduling but, to my knowledge, none of them are robust enough to satisfy the 
@@ -60,7 +66,8 @@ Schedules (timetables) for each teacher and each room are written in "timetable/
 and "timetable/rooms.xlsx", respectively. A copy of the solution in base classes is saved in a pickle file, "status.pkl".
 
 ## Scripts
-- **zhes_scheduling_problem.py** defines the inputs for the scheduling problem.
+- **zhes_scheduling_problem.py** defines the inputs for the scheduling problem. The
+problem consists of 994 courses, 66 teachers and 49 rooms.
 
 - **solving_zhes_using_sequential_LNS.py** is the main scrip to run to solve the scheduling problem and outputs a 
 pickled solution file **status.pkl**
