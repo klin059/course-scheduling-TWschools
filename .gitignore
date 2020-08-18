@@ -1,3 +1,5 @@
 __pycache__
+.vs/
 .pkl
 archives/
+tw_scheduling_env/
