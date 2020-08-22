@@ -2,7 +2,7 @@
 """
 Created on Thu Jul 26 16:53:30 2018
 scheduling module
-@author: zhes
+@author: KML
 """
 import BaseModel as bm
 import scoring

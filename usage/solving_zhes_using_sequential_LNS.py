@@ -2,7 +2,7 @@
 """
 Created on Thu Jul  5 10:11:31 2018
 
-@author: zhes
+@author: KML
 """
 #import solving_zhes_problem1_using_repeated_assignment as solving
 import zhes_scheduling_problem

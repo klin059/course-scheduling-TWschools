@@ -2,7 +2,7 @@
 """
 Created on Mon Jul  2 09:07:08 2018
 
-Defines basic classes for the scheduling problem
+Defines classes for the scheduling problem
 
 @author: KML
 """

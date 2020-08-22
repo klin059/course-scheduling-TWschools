@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Jul 28 16:08:53 2018
-Scoring functions
+Define scoring functions
 @author: KML
 """
 import BaseModel as bm

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Aug  8 14:23:24 2018
-Post processing
-@author: zhes
+Post processing \ checking requirements are met
+@author: KML
 """
 import pandas as pd
 def _two_days_apart_restricted_days(selected_course_day):
