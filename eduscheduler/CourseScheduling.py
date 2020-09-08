@@ -65,23 +65,6 @@ def large_neighbourhood_search_with_scoring(status, max_iteration = 300):
                     C.assign_course_period(local_solution, period)  
             else:
                 course.assign_course_period(local_solution, period)
-#            # for same_period requirement, need to assign all the relevant courses in the same iteration loop
-#            if "same_period" in course.requirements:
-##                # assign period to all courses that have this requirement
-##                for C in course.requirements["same_period"]:
-##                    if C.assigned is True:
-##                        continue
-##                    else:
-##                        C.assign_course_period(local_solution, period)                    
-#                                # assign period to all courses that have this requirement
-#                for C in course.requirements["same_period"]:
-#                    if C.assigned is True:
-#                        continue
-#                    feasible_periods = C.get_feasible_periods_by_requirement(local_solution, feasible_periods)
-#                for C in course.requirements["same_period"]:
-#                    C.assign_course_period(local_solution, period)  
-#            else:
-#                course.assign_course_period(local_solution, period)
                 
         # update global solution
         local_score = scoring.get_status_penalty(local_solution)
